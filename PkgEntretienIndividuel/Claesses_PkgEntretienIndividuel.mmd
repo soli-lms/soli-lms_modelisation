@@ -1,0 +1,54 @@
+classDiagram
+    class Apprenant {
+        +int id
+        +string nom
+        +string email
+        +datetime created_at
+        +datetime updated_at
+    }
+
+    class Entretien {
+        +int id
+        +string titre
+        +string description
+        +datetime date_debut
+        +datetime date_fin
+        +int duree_maximale
+        +string status
+    }
+
+    class Question {
+        +int id
+        +string enonce
+        +enum type: "choix_unique", "choix_multiple", "texte_libre"
+        +bool has_other_option
+    }
+
+    class OptionQuestion {
+        +int id
+        +string texte
+        +bool is_correct
+    }
+
+    class ReponseEntretien {
+        +int id
+        +datetime date_soumission
+        +int duree
+    }
+
+    class ReponseQuestion {
+        +int id
+        +string reponse_texte
+        +bool is_other
+    }
+
+    %% Relationships
+    Apprenant "1" --> "0..*" ReponseEntretien
+    ReponseEntretien "1" --> "1" Entretien
+    Entretien "1" --> "1..*" Question
+    Question "1" --> "0..*" OptionQuestion
+    ReponseQuestion "1" --> "1" Question
+    ReponseQuestion "0..1" --> "0..*" OptionQuestion
+    ReponseEntretien "1" --> "1..*" ReponseQuestion
+
+  
