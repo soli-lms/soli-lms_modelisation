@@ -1,26 +1,49 @@
 classDiagram
 
 namespace PkgQcm {
-  class Apprenant 
-  class Qcm
-  class Question
-  class OptionQuestion
-  class ReponseQcm
-  class ReponseQuestion
-  class BrancheQuestion
+  class Apprenant {
+    id : int
+    nom : string
+    prenom : string
+    email : string
+  }
+
+  class Qcm {
+    id : int
+    titre : string
+    description : string
+    date_creation : date
+  }
+
+  class Question {
+    id : int
+    contenu : string
+    type : string %% Choix unique, choix multiple
+  }
+
+  class OptionQuestion {
+    id : int
+    texte : string
+    est_correcte : bool
+  }
+
+  class ReponseQcm {
+    id : int
+    duree : int
+    score : float
+  }
+
+  class ReponseQuestion {
+    id : int
+    reponse_texte : string
+    est_correcte : bool
+  }
+
+  class BrancheQuestion {
+    id : int
+    condition : string
+  }
 }
-
-%% type : Choix unique , choix multiple
-class Question{
-  type : string 
-
-
-}
-
-class ReponseQuestion {
-  duree : int
-}
-
 
 OptionQuestion --> Question
 ReponseQuestion --> Question
@@ -30,6 +53,3 @@ ReponseQuestion --> "*" OptionQuestion
 Qcm --> BrancheQuestion
 Apprenant --> ReponseQcm
 ReponseQcm --> Qcm
-
-
-
